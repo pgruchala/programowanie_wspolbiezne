@@ -28,10 +28,7 @@ def setup_signals():
     signal.signal(signal.SIGTERM, signal.SIG_IGN)
     
     signal.signal(signal.SIGUSR1, handle_sigusr1)
-    
-    signal.signal(signal.SIGINT, handle_sigusr1)
     print(f"Serwer: PID = {os.getpid()}. Obsługa sygnałów ustawiona.")
-    print("Serwer: IGN SIGHUP, IGN SIGTERM, EXIT on SIGUSR1/SIGINT.")
 
 def create_fifo(path):
     try:
