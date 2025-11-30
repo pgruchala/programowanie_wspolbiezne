@@ -14,7 +14,7 @@ def runClient():
         print("Wystąpił problem otwieraniem kolejek IPC")
         return
     
-    countries = ["Belgia", 'Polska', 'Czechy', "Estonia", "Norwegia", "Szkocja","Niemcy"]
+    countries = ["Estonia", "Norwegia", "Szkocja","Niemcy"]
     for country in countries:
         msg = country.encode()
         mq_in.send(msg, type=pid)
