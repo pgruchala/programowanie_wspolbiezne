@@ -21,9 +21,7 @@ def reading(p,s):
                             result = reading(newFile, s)
                             os._exit(result) 
                         else:
-                            _, status = os.waitpid(pid, 0)
-                            if os.WIFEXITED(status):
-                                count += os.WEXITSTATUS(status)
+                            childs.append(pid)
                     except OSError as e:
                         print(f"Fork failed: {e}")
                 else:
@@ -42,6 +40,6 @@ def reading(p,s):
 
 
 
-total = reading('plikA.txt','z')
+total = reading('plikA.txt','czterdzieści')
 
 print(f"Liczba wystąpień słowa: {total}")

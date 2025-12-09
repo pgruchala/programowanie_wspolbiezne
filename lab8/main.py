@@ -2,14 +2,14 @@ import threading, random, time
 
 N = 20
 SIZE = 1000000
-NUM_THREADS=1 # bazowo
+NUM_THREADS=4096 # bazowo
 
 L = [random.randint(0,N-1) for _ in range(SIZE)]
 
 global_count = [0]*N
 lock = threading.Lock()
 
-def worker_count(start_index,end_index,thread_id):
+def worker_count(start_index,end_index):
     local_count = [0]*N
 
     for i in range(start_index,end_index):
@@ -20,7 +20,7 @@ def worker_count(start_index,end_index,thread_id):
         for i in range(N):
             global_count[i]+=local_count[i]
 
-def main_multithread():
+def multithread():
     global global_count
     global_count=[0]*N
     threads = []
@@ -32,7 +32,7 @@ def main_multithread():
         start_idx= i*chunk_size
         end_idx = SIZE if i==NUM_THREADS-1 else (i+1)*chunk_size
 
-        t = threading.Thread(target=worker_count,args=(start_idx,end_idx,i))
+        t = threading.Thread(target=worker_count,args=(start_idx,end_idx))
         threads.append(t)
         t.start()
     for t in threads:
@@ -43,7 +43,7 @@ def main_multithread():
 
 
 if __name__=="__main__":
-    wynik = main_multithread()
+    wynik = multithread()
     print("rezultat:\n")
     for i in range(N):
         print(f"Liczba {i}: {wynik[i]}")
