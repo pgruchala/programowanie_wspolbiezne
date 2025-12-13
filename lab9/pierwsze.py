@@ -15,3 +15,6 @@ def gen_pierwsza(start, end):
     for i in range(start,end+1):
         if pierwsza(i):
             pierwsze.append(i)
+    return pierwsze
+
+
